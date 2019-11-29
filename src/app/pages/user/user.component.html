@@ -1,0 +1,69 @@
+<div class="container mt-3">
+    <div class="conatiner">
+        <div class="accordion" id="accordionExample">
+            
+            <div class="card">
+                <div class="card-header bg-info text-white" id="headingOne">
+                    <h2 class="mb-0">
+                        User information
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Name: <strong>{{user.name | uppercase}}</strong></li>
+                            <li class="list-group-item">Surname: <strong>{{user.surname | uppercase}}</strong> </li>
+                            <li class="list-group-item">Email: <strong>{{user.email | uppercase}}</strong> </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card-header bg-info text-white" id="headingOne">
+                    <h2 class="mb-0">
+                        Homework information
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show">
+                    <div class="card-body">
+                        <form class="example-form">
+                            <mat-form-field class="example-full-width">
+                                <input type="text" placeholder="Add a task" aria-label="Number" matInput
+                                    [formControl]="myControl" [matAutocomplete]="auto">
+                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="selectTask($event)">
+                                    <mat-option *ngFor="let task of filteredOptions | async" [value]="task">
+                                        {{task.name}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </form>
+
+                        <table *ngIf="user.tasks.length >= 1" class="table table-striped  table-hover table-sm">
+                            <thead>
+                                <tr >
+                                    <th>Name task</th>
+                                    <th>Creation date</th>
+                                    <th>Detelete task</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of user.tasks">
+                                    <td><strong>{{item.name}}</strong></td>
+                                    <td><strong>{{item.date | date:"full" }}</strong></td>
+                                    <td><button class="btn btn-danger btn-sm" (click)="deleteTaskUser(item)"><i class="fas fa-trash-alt"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div *ngIf="user.tasks.length < 1" class="alert alert-info">
+                            The user has no tasks assigned at the moment
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

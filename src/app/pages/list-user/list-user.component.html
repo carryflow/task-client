@@ -1,0 +1,35 @@
+<div class="container">
+  <h1 class="h1-strong">List users </h1>
+  <!-- table-->
+  <table class="table table-striped ">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of users">
+        <td>{{item.name}}</td>
+        <td>{{item.surname}}</td>
+        <td>{{item.email}}</td>
+        <td>
+          <button type="button" [routerLink]="['/add-task', item._id]" class="btn btn-primary btn-sm mr-2"><i
+              class="fas fa-plus"></i> Add Tasks</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- end table-->
+
+  <!-- pagination-->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li *ngIf="page > 1"><a class="page-link mr-3" [routerLink]="['/users', prev_page]">Previous</a></li>
+      <li *ngIf="pages != page"><a class="page-link" [routerLink]="['/users', next_page]">Next</a></li>
+    </ul>
+  </nav>
+  <!-- end pagination-->
+</div>
